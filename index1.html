@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Aplikasi Grosir Murah</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<h1>Grosir VMN</h1>
+
+<div class="crud-form">
+  <h2>Tambah Produk Grosir</h2>
+  <form id="crud-form">
+    <input type="text" id="nama" placeholder="Nama Produk" required>
+    <input type="text" id="produk" placeholder="Harga" required>
+    <button type="button" onclick="tambahData()">Tambah</button>
+  </form>
+</div>
+<table id="data-table">
+  <thead>
+    <tr>
+      <th>Nama Produk</th>
+      <th>Harga</th>
+      <th>Aksi</th>
+    </tr>
+  </thead>
+  <tbody id="data-body">
+    <!-- Data akan ditampilkan di sini -->
+  </tbody>
+</table>
+
+      <!-- Tambahkan produk lainnya sesuai kebutuhan -->
+  </div>
+</section>
+<section id="cart">
+  <div class="container">
+    <h2>Keranjang Belanja</h2>
+    <ul id="cart-items">
+      <!-- Item keranjang akan ditampilkan di sini -->
+    </ul>
+    <p>Total: <span id="total">Rp. 0</span></p>
+    <button onclick="checkout()">Checkout</button>
+    <button onclick="editCart()">Edit</button> <!-- Tombol Edit -->
+    <button onclick="deleteProduct()">Hapus</button>
+  </div>
+</section>
+
+ 
+
+<script src="script.js"></script>
+</body>
+
+</html>

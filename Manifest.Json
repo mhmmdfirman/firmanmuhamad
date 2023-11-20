@@ -1,0 +1,89 @@
+// Data produk
+const dataProduk = [
+  { id: 1, nama: "Beras", harga: 15000 },
+  { id: 2, nama: "Minyak Goreng", harga: 20000 },
+  { id: 3, nama: "Gula", harga: 12000 },
+  // Tambahkan produk lainnya sesuai kebutuhan
+];
+
+// Data keranjang belanja
+const keranjangBelanja = [];
+
+// Fungsi untuk menambahkan data produk ke tabel
+function tambahData() {
+  const namaProduk = document.getElementById("nama").value;
+  const hargaProduk = document.getElementById("produk").value;
+
+  // Validasi input
+  if (!namaProduk || !hargaProduk || isNaN(hargaProduk)) {
+    alert("Mohon isi data dengan benar.");
+    return;
+  }
+
+  // Tambahkan data ke array produk
+  const idProduk = dataProduk.length + 1;
+  const produkBaru = { id: idProduk, nama: namaProduk, harga: parseInt(hargaProduk) };
+  dataProduk.push(produkBaru);
+
+  // Render ulang tabel
+  renderTable();
+}
+
+// Fungsi untuk menambahkan produk ke keranjang belanja
+function addToCart(productId) {
+  const selectedProduct = dataProduk.find(product => product.id === productId);
+
+  if (selectedProduct) {
+    keranjangBelanja.push(selectedProduct);
+    updateCart();
+  }
+}
+
+// Fungsi untuk menampilkan produk pada keranjang belanja
+function updateCart() {
+  const cartItems = document.getElementById("cart-items");
+  cartItems.innerHTML = "";
+
+  let totalHarga = 0;
+
+  keranjangBelanja.forEach(item => {
+    const listItem = document.createElement("li");
+    listItem.textContent = `${item.nama} - Rp. ${item.harga}`;
+    cartItems.appendChild(listItem);
+
+    totalHarga += item.harga;
+  });
+
+  document.getElementById("total").textContent = `Rp. ${totalHarga}`;
+}
+
+// Fungsi untuk melakukan checkout
+function checkout() {
+  alert("Checkout berhasil! Total belanja: Rp. " + document.getElementById("total").textContent);
+}
+
+// Fungsi untuk melakukan edit item pada keranjang
+function editCart() {
+  alert("Edit keranjang belanja"); // Gantilah dengan logika edit yang sesuai
+}
+
+// Fungsi untuk merender ulang tabel produk
+function renderTable() {
+  const dataBody = document.getElementById("data-body");
+  dataBody.innerHTML = "";
+
+  dataProduk.forEach(product => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${product.nama}</td>
+      <td>Rp. ${product.harga}</td>
+      <td>
+        <button onclick="addToCart(${product.id})">Tambah ke Keranjang</button>
+      </td>
+    `;
+    dataBody.appendChild(row);
+  });
+}
+
+// Panggil fungsi renderTable saat halaman dimuat
+document.addEventListener("DOMContentLoaded", renderTable);
